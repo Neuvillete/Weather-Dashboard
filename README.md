@@ -1,4 +1,4 @@
-Certainly! Here's a `README.md` template for your Weather Dashboard project using Python FastAPI, HTML, CSS, and JavaScript.
+Certainly! Here's a `README.md` template for your Weather Dashboard project using Python FastAPI, HTML, CSS, and JS.
 
 ```markdown
 # Weather Dashboard
