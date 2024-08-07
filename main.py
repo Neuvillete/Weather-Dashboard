@@ -21,7 +21,11 @@ async def read_root(request: Request):
 @app.get("/weather", response_class=HTMLResponse)
 async def get_weather(request: Request, city: str = Query(None), lat: float = Query(None), lon: float = Query(None), zip_code: str = Query(None)):
     if not any([city, lat, lon, zip_code]):
-        return templates.TemplateResponse("index.html", {"request": request, "weather_data": None, "error_message": "Please enter a city name, coordinates (latitude and longitude), or ZIP code."})
+        return templates.TemplateResponse("index.html", 
+                                          {"request": request,
+                                           "weather_data": None,
+                                           "error_message": "Please enter a city name, coordinates (latitude and longitude), or ZIP code."}
+                                         )
 
     weather_data = None
     error_message = None
