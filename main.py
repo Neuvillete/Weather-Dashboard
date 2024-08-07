@@ -10,7 +10,7 @@ app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-API_KEY = '3f8c5a60bb01afd27da155bb66ea1'
+API_KEY = 'YOUR_API_KEY_HERE'
 search_history = []
 
 @app.get("/", response_class=HTMLResponse)
