@@ -1,6 +1,3 @@
-Certainly! Here's a `README.md` template for your Weather Dashboard project using Python FastAPI, HTML, CSS, and JS.
-
-
 # Weather Dashboard
 
 ![Weather Dashboard](path/to/your/screenshot.png)
