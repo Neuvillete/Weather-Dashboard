@@ -44,7 +44,12 @@ async def get_weather(request: Request, city: str = Query(None), lat: float = Qu
     if city and city not in search_history:
         search_history.append(city)
 
-    return templates.TemplateResponse("index.html", {"request": request, "weather_data": weather_data, "current_time": current_time, "history": search_history, "error_message": error_message})
+    return templates.TemplateResponse("index.html", {"request": request,
+                                                     "weather_data": weather_data,
+                                                     "current_time": current_time,
+                                                     "history": search_history,
+                                                     "error_message": error_message}
+                                     )
 
 def fetch_weather(*args):
     params = {args[i]: args[i + 1] for i in range(0, len(args), 2)}
