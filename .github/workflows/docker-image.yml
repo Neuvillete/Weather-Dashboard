@@ -1,10 +1,18 @@
-FROM python:3.9-slim
+name: Docker Image CI
 
-WORKDIR /app
+on:
+  push:
+    branches: [ $default-branch ]
+  pull_request:
+    branches: [ $default-branch ]
 
-COPY requirements.txt .
-RUN pip install -r requirements.txt
+jobs:
 
-COPY . .
+  build:
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
