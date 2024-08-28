@@ -1,1 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link href="styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="weather-container">
+        <div class="loading-overlay" id="loadingIndicator">
+            <div class="loading-spinner"></div>
+        </div>
+        <div class="weather-card">
+            <div class="weather-sidebar">
+                <h2 class="text-2xl font-bold mb-6">Weather App</h2>
+                <form action="/weather" method="get" id="weatherForm" onsubmit="showLoading()">
+                    <input id="city" type="text" name="city" required class="form-input" placeholder="Enter city name">
+                    <button type="submit" class="form-button">Get Weather</button>
+                </form>
+                {% if error_message %}
+                <p class="error-message">{{ error_message }}</p>
+                {% endif %}
+                <div class="search-history mt-auto">
+                    <h4 class="text-lg font-bold mb-2">Search History</h4>
+                    <ul id="searchHistoryList">
+                        {% for city in history %}
+                        <li onclick="searchCity('{{ city }}')"><i class="fas fa-history mr-2"></i>{{ city }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="weather-content">
+                {% if weather_data %}
+                <div class="weather-info">
+                    <h3 class="text-3xl font-bold mb-4">{{ weather_data.city }}, {{ weather_data.country }}</h3>
+                    <div class="flex items-center justify-center">
+                        <img src="{{ weather_data.icon_url }}" alt="Weather Icon" class="mr-4">
+                        <div class="text-left">
+                            <p class="text-5xl font-bold">{{ weather_data.temperature }}°C</p>
+                            <p class="text-xl">{{ weather_data.description }}</p>
+                        </div>
+                    </div>
+                    <div class="weather-details">
+                        <div class="weather-detail">
+                            <i class="fas fa-temperature-high"></i>
+                            <p>Feels like: {{ weather_data.feels_like }}°C</p>
+                        </div>
+                        <div class="weather-detail">
+                            <i class="fas fa-thermometer-half"></i>
+                            <p>Min/Max: {{ weather_data.temp_min }}°C / {{ weather_data.temp_max }}°C</p>
+                        </div>
+                        <div class="weather-detail">
+                            <i class="fas fa-tint"></i>
+                            <p>Humidity: {{ weather_data.humidity }}%</p>
+                        </div>
+                        <div class="weather-detail">
+                            <i class="fas fa-compress-arrows-alt"></i>
+                            <p>Pressure: {{ weather_data.pressure }} hPa</p>
+                        </div>
+                        <div class="weather-detail">
+                            <i class="fas fa-wind"></i>
+                            <p>Wind: {{ weather_data.wind_speed }} m/s, {{ weather_data.wind_deg }}°</p>
+                        </div>
+                        <div class="weather-detail">
+                            <i class="fas fa-cloud"></i>
+                            <p>Cloudiness: {{ weather_data.clouds }}%</p>
+                        </div>
+                        <div class="weather-detail">
+                            <i class="fas fa-eye"></i>
+                            <p>Visibility: {{ weather_data.visibility }} meters</p>
+                        </div>
+                        <div class="weather-detail">
+                            <i class="fas fa-sun"></i>
+                            <p>Sunrise: {{ weather_data.sunrise }}</p>
+                        </div>
+                        <div class="weather-detail">
+                            <i class="fas fa-moon"></i>
+                            <p>Sunset: {{ weather_data.sunset }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="flex items-center justify-center h-full">
+                    <p class="text-2xl text-center">Enter a city name to get the weather information.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 
+    <script src="scripts.js"></script>
+</body>
+</html>
